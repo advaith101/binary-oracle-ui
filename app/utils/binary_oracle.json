@@ -1,0 +1,477 @@
+{
+  "address": "CyJDfKuJ7aAF86dJifrKXBWLLrT2TcmoqSVvqgTJ9FR6",
+  "metadata": {
+    "name": "binary_oracle",
+    "version": "0.1.0",
+    "spec": "0.1.0",
+    "description": "Created with Anchor"
+  },
+  "instructions": [
+    {
+      "name": "commit",
+      "discriminator": [
+        223,
+        140,
+        142,
+        165,
+        229,
+        208,
+        156,
+        74
+      ],
+      "accounts": [
+        {
+          "name": "oracle",
+          "writable": true
+        },
+        {
+          "name": "node",
+          "writable": true
+        },
+        {
+          "name": "authority",
+          "signer": true,
+          "relations": [
+            "node"
+          ]
+        }
+      ],
+      "args": [
+        {
+          "name": "vote_hash",
+          "type": {
+            "array": [
+              "u8",
+              32
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "initialize",
+      "discriminator": [
+        175,
+        175,
+        109,
+        31,
+        13,
+        152,
+        155,
+        237
+      ],
+      "accounts": [
+        {
+          "name": "oracle",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "authority",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "collateral",
+          "type": "u64"
+        }
+      ]
+    },
+    {
+      "name": "join_network",
+      "discriminator": [
+        246,
+        184,
+        107,
+        68,
+        39,
+        172,
+        8,
+        30
+      ],
+      "accounts": [
+        {
+          "name": "oracle",
+          "writable": true
+        },
+        {
+          "name": "node",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "node_authority",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "resolve",
+      "discriminator": [
+        246,
+        150,
+        236,
+        206,
+        108,
+        63,
+        58,
+        10
+      ],
+      "accounts": [
+        {
+          "name": "oracle",
+          "writable": true
+        },
+        {
+          "name": "authority",
+          "signer": true
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "reveal",
+      "discriminator": [
+        9,
+        35,
+        59,
+        190,
+        167,
+        249,
+        76,
+        115
+      ],
+      "accounts": [
+        {
+          "name": "oracle",
+          "writable": true
+        },
+        {
+          "name": "node",
+          "writable": true
+        },
+        {
+          "name": "authority",
+          "signer": true,
+          "relations": [
+            "node"
+          ]
+        }
+      ],
+      "args": [
+        {
+          "name": "vote",
+          "type": "bool"
+        },
+        {
+          "name": "nonce",
+          "type": {
+            "array": [
+              "u8",
+              32
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "slash_colluding",
+      "discriminator": [
+        139,
+        39,
+        6,
+        35,
+        221,
+        93,
+        157,
+        174
+      ],
+      "accounts": [
+        {
+          "name": "oracle",
+          "writable": true
+        },
+        {
+          "name": "colluding_node",
+          "writable": true
+        },
+        {
+          "name": "slasher_node",
+          "writable": true
+        },
+        {
+          "name": "slasher",
+          "signer": true
+        }
+      ],
+      "args": [
+        {
+          "name": "vote",
+          "type": "bool"
+        },
+        {
+          "name": "nonce",
+          "type": {
+            "array": [
+              "u8",
+              32
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "start_request",
+      "discriminator": [
+        58,
+        166,
+        232,
+        79,
+        38,
+        173,
+        70,
+        30
+      ],
+      "accounts": [
+        {
+          "name": "oracle",
+          "writable": true
+        },
+        {
+          "name": "authority",
+          "signer": true
+        }
+      ],
+      "args": []
+    }
+  ],
+  "accounts": [
+    {
+      "name": "Node",
+      "discriminator": [
+        208,
+        53,
+        1,
+        3,
+        49,
+        122,
+        180,
+        49
+      ]
+    },
+    {
+      "name": "Oracle",
+      "discriminator": [
+        139,
+        194,
+        131,
+        179,
+        140,
+        179,
+        229,
+        244
+      ]
+    }
+  ],
+  "events": [
+    {
+      "name": "NodeSlashed",
+      "discriminator": [
+        195,
+        114,
+        214,
+        16,
+        173,
+        73,
+        177,
+        87
+      ]
+    }
+  ],
+  "errors": [
+    {
+      "code": 6000,
+      "name": "InvalidPhase",
+      "msg": "Invalid phase for this operation"
+    },
+    {
+      "code": 6001,
+      "name": "RevealPhaseClosed",
+      "msg": "Reveal phase is closed"
+    },
+    {
+      "code": 6002,
+      "name": "InvalidReveal",
+      "msg": "Invalid reveal"
+    },
+    {
+      "code": 6003,
+      "name": "InvalidCollusion",
+      "msg": "Invalid collusion proof"
+    },
+    {
+      "code": 6004,
+      "name": "RevealPhaseNotClosed",
+      "msg": "Reveal phase is not closed yet"
+    },
+    {
+      "code": 6005,
+      "name": "NodeNotJoined",
+      "msg": "Node has not joined the network"
+    },
+    {
+      "code": 6006,
+      "name": "AlreadyCommitted",
+      "msg": "Node has already committed"
+    },
+    {
+      "code": 6007,
+      "name": "InvalidPhaseForJoining",
+      "msg": "Invalid phase for joining the network"
+    },
+    {
+      "code": 6008,
+      "name": "SlasherAlreadyCommitted",
+      "msg": "Slasher has already committed"
+    }
+  ],
+  "types": [
+    {
+      "name": "Node",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "authority",
+            "type": "pubkey"
+          },
+          {
+            "name": "joined",
+            "type": "bool"
+          },
+          {
+            "name": "vote_hash",
+            "type": {
+              "array": [
+                "u8",
+                32
+              ]
+            }
+          },
+          {
+            "name": "vote",
+            "type": "bool"
+          },
+          {
+            "name": "committed",
+            "type": "bool"
+          },
+          {
+            "name": "revealed",
+            "type": "bool"
+          },
+          {
+            "name": "slashed",
+            "type": "bool"
+          }
+        ]
+      }
+    },
+    {
+      "name": "NodeSlashed",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "oracle",
+            "type": "pubkey"
+          },
+          {
+            "name": "slashed_node",
+            "type": "pubkey"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Oracle",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "authority",
+            "type": "pubkey"
+          },
+          {
+            "name": "collateral",
+            "type": "u64"
+          },
+          {
+            "name": "is_resolved",
+            "type": "bool"
+          },
+          {
+            "name": "resolution_bit",
+            "type": "bool"
+          },
+          {
+            "name": "phase",
+            "type": {
+              "defined": {
+                "name": "Phase"
+              }
+            }
+          },
+          {
+            "name": "reveal_end_time",
+            "type": "i64"
+          },
+          {
+            "name": "reveal_duration",
+            "type": "i64"
+          },
+          {
+            "name": "total_nodes",
+            "type": "u64"
+          },
+          {
+            "name": "committed_nodes",
+            "type": "u64"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Phase",
+      "type": {
+        "kind": "enum",
+        "variants": [
+          {
+            "name": "Precommit"
+          },
+          {
+            "name": "Commit"
+          },
+          {
+            "name": "Reveal"
+          },
+          {
+            "name": "Complete"
+          }
+        ]
+      }
+    }
+  ]
+}
